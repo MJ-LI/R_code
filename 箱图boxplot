@@ -1,0 +1,37 @@
+library(ggplot2)
+data <- read.table("data.txt", header = T, sep = "\t")
+
+# 普通箱图
+ggplot(data, aes(x = group, y = value, fill = group))+
+  geom_boxplot() +
+  theme_bw()
+
+# 添加散点
+ggplot(data, aes(x = group, y = value, fill = group))+
+  geom_boxplot() +
+  geom_point() +
+  theme_bw()
+
+# 散点抖动
+ggplot(data, aes(x = group, y = value, fill = group))+
+  geom_boxplot() +
+  geom_point(position = position_jitter(0.2)) +
+  theme_bw()
+
+# 多组数据箱图
+ggplot(data, aes(x = group, y = value, fill = treatment))+
+  geom_boxplot() +
+  theme_bw()
+
+# 多组数据箱图添加散点
+ggplot(data, aes(x = group, y = value, fill = treatment))+
+  geom_boxplot() +
+  geom_point(position = position_jitter(0.2)) +
+  theme_bw()
+
+# 多组数据箱图添加散点 正确添加
+ggplot(data, aes(x = group, y = value, fill = treatment))+
+  geom_boxplot() +
+  geom_point(position = position_jitterdodge(jitter.width = 0.2)) +
+  theme_bw()
+
